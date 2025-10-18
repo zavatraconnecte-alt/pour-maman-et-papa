@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 Pour Papa & Maman 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.9);
+      animation: floatUp 8s linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 650px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      animation: fadeIn 1.5s ease;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff6b6b;
+      font-size: 2.2em;
+    }
+
+    button {
+      background: linear-gradient(90deg, #ff758c, #ff7eb3);
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      margin: 12px;
+      border-radius: 15px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      transform: scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .message {
+      display: none;
+      font-size: 1.2em;
+      color: #444;
+      margin-top: 15px;
+      animation: fadeIn 1s ease;
+    }
+
+    .message.special {
+      color: #ff4d4d;
+      font-weight: 600;
+      margin-top: 25px;
+    }
+
+    .final-message {
+      display: none;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2em;
+      color: #ff4d4d;
+      margin-top: 40px;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff6b6b, 0 0 30px #ff9a9e;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #ffb6b9, 0 0 15px #ff9a9e; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #ff6b6b, 0 0 40px #ff758c; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main">
+    <h1>💖 Pour qui veux-tu envoyer de l’amour ? 💖</h1>
+    <button onclick="showMessages('papa')">Pour Papa 👨‍🦰</button>
+    <button onclick="showMessages('maman')">Pour Maman 👩‍🦰</button>
+    <audio id="music" src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_5d4465bff9.mp3?filename=soft-piano-melody-140173.mp3" controls loop hidden></audio>
+  </div>
+
+  <script>
+    const messagesPapa = [
+      "Papa, tu es mon héros de tous les jours 💪❤️",
+      "Merci d’être toujours là pour moi, tu es le meilleur ! 👑",
+      "Ton sourire rend ma journée plus belle ☀️",
+      "Je t’aime jusqu’aux étoiles et encore plus 🚀💙",
+      "Tu es fort, gentil et incroyable, papa ❤️",
+      "Quand tu me fais rire, le monde devient plus doux 😄",
+      "Grâce à toi, je sais que je peux tout affronter 💪",
+      "Tu as le plus grand cœur du monde 🌍💖",
+      "Je suis fier(e) d’avoir un papa comme toi 👏",
+      "Merci pour tous les moments que tu rends inoubliables ✨",
+      "Papa, tu es ma force et mon sourire 💞",
+      "Ton amour me donne confiance en moi 💫",
+      "Tu as toujours les mots justes pour me réconforter 🫶",
+      "Même quand je grandis, tu restes mon super-héros 💥",
+      "J’aime nos moments, nos rires et même nos silences 🧡",
+      "Tu es la preuve que les papas peuvent être tendres 💗",
+      "Merci pour ta patience, ton humour et ton amour 🥰",
+      "Je ne te le dis pas assez, mais tu comptes énormément 💭💖",
+      "Tu es un modèle que j’admire chaque jour 🌟",
+      "Merci pour tout ce que tu m’as offert, tout ce que tu m’as appris et donné. Je ne pourrai jamais assez te remercier 🙏❤️",
+      "Je m’excuse pour mes erreurs, je veux juste ton bonheur et ton sourire ❤️‍🩹"
+    ];
+
+    const messagesMaman = [
+      "Maman, tu es la plus douce et la plus belle du monde 🌸",
+      "Merci pour tout ton amour et ta patience 💕",
+      "Ton câlin est le plus réconfortant de tous 🤗",
+      "Tu rends la vie plus lumineuse chaque jour ☀️",
+      "Je t’aime plus que tous les gâteaux du monde 🍰💖",
+      "Tu es la reine de mon cœur 👑💓",
+      "Merci de toujours croire en moi 🌼",
+      "Ton amour est ma plus belle force 💫",
+      "Tu rends tout plus beau, même les jours gris 🌦️",
+      "Ton rire est ma musique préférée 🎵💖",
+      "Je t’aime pour tout ce que tu fais et tout ce que tu es 💐",
+      "Tu es ma première amie et ma plus grande inspiration 🌹",
+      "Tu sais toujours comment me consoler 🌷",
+      "Tu es mon refuge quand tout va mal 💞",
+      "Ton regard plein d’amour m’apaise instantanément 🩷",
+      "Tu es la plus belle personne du monde à mes yeux 👑",
+      "Merci pour chaque repas, chaque mot, chaque câlin 🤍",
+      "Je veux te voir sourire tous les jours 😍",
+      "Je t’aime de tout mon cœur et pour toujours 💖",
+      "Merci pour tout ce que tu m’as offert, tout ce que tu as fait et tout l’amour que tu m’as donné. Tu es incroyable 💝",
+      "Je m’excuse pour mes erreurs, je veux juste que tu sois heureuse 💖"
+    ];
+
+    function showMessages(personne) {
+      const container = document.getElementById('main');
+      const music = document.getElementById('music');
+      const messages = personne === 'papa' ? messagesPapa : messagesMaman;
+
+      music.hidden = false;
+      music.play().catch(() => {});
+
+      container.innerHTML = `<h1>💌 Messages pour ${personne === 'papa' ? 'Papa' : 'Maman'} 💌</h1>`;
+
+      messages.forEach((msg, i) => {
+        const p = document.createElement('p');
+        p.className = 'message' + (i >= messages.length - 2 ? ' special' : '');
+        p.innerText = msg;
+        container.appendChild(p);
+        setTimeout(() => p.style.display = 'block', i * 1000);
+      });
+
+      // Ajoute le message final lumineux
+      setTimeout(() => {
+        const final = document.createElement('div');
+        final.className = 'final-message';
+        final.innerHTML = "Merci Papa et Maman, je vous aime plus que tout au monde 💖<br>– Riad 💫";
+        container.appendChild(final);
+        final.style.display = 'block';
+      }, messages.length * 1000 + 2000);
+
+      const backBtn = document.createElement('button');
+      backBtn.innerText = "⬅️ Retour";
+      backBtn.onclick = () => location.reload();
+      setTimeout(() => container.appendChild(backBtn), messages.length * 1000 + 4000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = ['💖','💞','💘','💝','❤️'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      heart.style.animationDuration = Math.random() * 5 + 4 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
